@@ -1,0 +1,86 @@
+@import "variables";
+@import "bootstrap";
+@import "compass/css3";
+//@import "compass/reset.scss";
+@import "compass/layout.scss";
+@import "compass/utilities";
+
+
+//mixin
+@mixin horizontal-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+//var
+
+$default-section-height:	500px;
+$default-section-padding:	10px;
+$default-footer-height: 	150px;
+
+
+//scss
+body{padding-top:$navbar-height;}
+
+main{background:white;}
+
+main section{
+	@include make-row();
+	height: $default-section-height;
+	padding:$padding-base-vertical $padding-base-horizontal $padding-base-vertical $padding-base-horizontal;
+	border-bottom:1px solid $panel-default-border;
+
+	
+	#d3-cloud{
+		@include horizontal-center;
+		width:800px;
+		a {@include unstyled-link;}
+	}
+
+	.thumbnail{
+		height: $default-section-height - ($padding-base-horizontal * 2);
+		a 	{text-decoration:none;}
+		h3 	{@include link-colors($h3-color,$h3-hover-color);}
+		p 	{overflow:hidden; max-height:140px;width:100%;}
+	}
+
+	article p:first-letter{
+		font-size: $font-size-large;
+		padding-right:1.5px;
+	}
+
+
+}//main-end
+
+@include sticky-footer($default-footer-height, "#wapper", "#wapper-footer", "footer"); 
+footer{
+	background:#2C688C;
+	@include make-row();
+	color:#ffffff;
+	padding:$padding-base-vertical $padding-base-horizontal $padding-base-vertical $padding-base-horizontal;
+	.info{
+		 @include make-lg-column(6);
+		 @include vertical-align();
+
+		 p{padding-left:$padding-base-horizontal;}
+		
+	}
+	.contact{
+		@include make-lg-column(5);
+		@include make-lg-column-offset(1);
+		ul{
+			@include make-lg-column(3);
+			li {border-top:1px solid #BAD9EC;font-size:inherit;}
+			li:last-child {border-bottom:1px solid #BAD9EC;}
+		}
+	}
+
+}
